@@ -38,8 +38,18 @@ public class PlayerController : MonoBehaviour {
             UpdateState("PlayerDie");
             game.GetComponent<GameController>().gameState = GameState.Ended;
             enemyGenerator.SendMessage("CancelGenerator", true);
+
+            game.SendMessage("ResetTimeScale", 0.5f);
+        } else if (other.gameObject.tag == "Point")
+        {
+            game.SendMessage("IncreasePoints");
         }
 
+    }
+
+    void GameReady()
+    {
+        game.GetComponent<GameController>().gameState = GameState.Ready; ;
     }
 
 
